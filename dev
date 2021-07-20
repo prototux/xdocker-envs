@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-BPRM="--rm -it -v $HOME:$HOME --privileged -e XDEV=dev-$1"
+BPRM="--rm -it -v $HOME:$HOME -w $PWD --privileged -e XDEV=dev-$1"
 XPRM="-v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY"
 SPRM="-v $XDG_RUNTIME_DIR/pulse:/tmp/pulse"
+
 docker run $BPRM $XPRM $SPRM dev-$1
