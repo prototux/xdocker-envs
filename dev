@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
+# Base paramters, X11 parameters
 BPRM="--rm -it -v $HOME:$HOME -w $PWD --privileged -e XDEV=dev-$1"
 XPRM="-v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY"
-SPRM="-v $XDG_RUNTIME_DIR/pulse:/tmp/pulse"
 
-docker run $BPRM $XPRM $SPRM dev-$1
+# Get env name and remove it from $@
+env=$1
+shift
+
+docker run $BPRM $XPRM dev-$env $@
